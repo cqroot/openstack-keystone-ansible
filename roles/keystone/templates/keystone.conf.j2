@@ -1,0 +1,8 @@
+[DEFAULT]
+log_dir = /var/log/keystone
+
+[token]
+provider = fernet
+
+[database]
+connection = {{ main.keystone_connection }}

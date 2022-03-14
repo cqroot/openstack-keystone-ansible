@@ -1,4 +1,9 @@
-- name: install yum dependency
+- name: Include vars
+  include_vars:
+    file: main.yml
+    name: main
+
+- name: Install yum dependency
   yum:
     name: "{{ packages }}"
   vars:
@@ -17,3 +22,50 @@
     name: keystone==20.0.0
     executable: pip3
     extra_args: -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+- name: Create group "keystone"
+  group:
+    name: keystone
+    state: present
+
+- name: Add the user "keystone"
+  user:
+    name: keystone
+    group: keystone
+
+- name: Create keystone configuration directory
+  file:
+    path: /etc/keystone
+    state: directory
+    mode: "0755"
+
+- name: Create keystone log directory
+  file:
+    path: /var/log/keystone
+    state: directory
+    mode: "0755"
+
+- name: Template to /etc/keystone/keystone.conf
+  template:
+    src: keystone.conf.j2
+    dest: /etc/keystone/keystone.conf
+    owner: keystone
+    group: keystone
+    mode: "0644"
+
+- name: Populate the Identity service database
+  shell: keystone-manage db_sync
+
+- name: Initialize Fernet key repositories
+  shell: keystone-manage fernet_setup --keystone-user keystone --keystone-group keystone
+
+- name: Initialize Fernet key repositories
+  shell: keystone-manage credential_setup --keystone-user keystone --keystone-group keystone
+
+- name: Bootstrap the Identity service
+  shell:
+    keystone-manage bootstrap --bootstrap-password {{ main.keystone_bootstrap_password }} \
+    --bootstrap-admin-url http://{{ ansible_ssh_host }}:{{ main.keystone_admin_port }}/v3/ \
+    --bootstrap-internal-url http://{{ ansible_ssh_host }}:{{ main.keystone_public_port }}/v3/ \
+    --bootstrap-public-url http://{{ ansible_ssh_host }}:{{ main.keystone_public_port }}/v3/ \
+    --bootstrap-region-id RegionOne
