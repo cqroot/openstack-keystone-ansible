@@ -1,0 +1,8 @@
+---
+- name: Template to /etc/keystone/keystone.conf
+  template:
+    src: keystone.conf.j2
+    dest: /etc/keystone/keystone.conf
+    owner: keystone
+    group: keystone
+    mode: "0644"
