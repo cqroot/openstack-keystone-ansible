@@ -4,3 +4,5 @@
   roles:
     - role: keystone-install
     - role: keystone-config
+    # - role: keystone-bootstrap
+    - role: keystone-restart

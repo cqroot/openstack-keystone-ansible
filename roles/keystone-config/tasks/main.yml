@@ -6,3 +6,11 @@
     owner: keystone
     group: keystone
     mode: "0644"
+
+- name: Create httpd configuration file
+  copy:
+    src: keystone.conf
+    dest: /etc/httpd/conf.d
+    owner: root
+    group: root
+    mode: "0644"

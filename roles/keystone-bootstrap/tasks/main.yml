@@ -15,3 +15,9 @@
     --bootstrap-internal-url http://{{ ansible_ssh_host }}:{{ keystone_public_port }}/v3/ \
     --bootstrap-public-url http://{{ ansible_ssh_host }}:{{ keystone_public_port }}/v3/ \
     --bootstrap-region-id RegionOne
+
+- name: Enable and start service httpd
+  systemd:
+    state: started
+    enabled: yes
+    name: httpd
