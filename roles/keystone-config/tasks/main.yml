@@ -14,3 +14,8 @@
     owner: root
     group: root
     mode: "0644"
+
+- name: Template to /root/admin-openrc
+  template:
+    src: admin-openrc.j2
+    dest: /root/admin-openrc

@@ -8,14 +8,16 @@
       - python3-pip
       - python3-devel
       - httpd
-      - mod_wsgi
+      - python3-mod_wsgi
 
 - name: Update pip3
   shell: pip3 install -U pip
 
 - name: Install keystone python package
   pip:
-    name: keystone==20.0.0
+    name:
+      - keystone==20.0.0
+      - python-openstackclient==5.8.0
     executable: pip3
     extra_args: -i https://pypi.tuna.tsinghua.edu.cn/simple
 
@@ -40,3 +42,5 @@
     path: /var/log/keystone
     state: directory
     mode: "0755"
+    owner: keystone
+    group: keystone
