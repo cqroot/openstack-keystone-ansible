@@ -20,7 +20,8 @@
       - python-openstackclient==5.8.0
       - PyMySQL==1.0.2
     executable: pip3
-    extra_args: -i https://pypi.tuna.tsinghua.edu.cn/simple
+    # extra_args: -i https://pypi.tuna.tsinghua.edu.cn/simple
+    extra_args: -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
 
 - name: Create group "keystone"
   group:
