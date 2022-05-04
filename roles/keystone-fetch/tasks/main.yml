@@ -1,0 +1,5 @@
+---
+- name: Fetch /etc/keystone from the remote and save to local
+  synchronize:  src={{ item }} dest={{ playbook_dir }} mode=pull
+  with_items:
+    - "/etc/keystone"

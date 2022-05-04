@@ -7,10 +7,10 @@
     group: keystone
     mode: "0644"
 
-- name: Create httpd configuration file
-  copy:
-    src: keystone.conf
-    dest: /etc/httpd/conf.d
+- name: Template to /etc/httpd/conf.d/keystone.conf
+  template:
+    src: wsgi-keystone.conf.j2
+    dest: /etc/httpd/conf.d/keystone.conf
     owner: root
     group: root
     mode: "0644"

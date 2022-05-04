@@ -1,3 +1,4 @@
+keystone_vip: 127.0.0.1
 keystone_connection: sqlite:////keystone.db
 keystone_bootstrap_password: ADMIN_PASS
 keystone_admin_port: 35357

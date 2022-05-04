@@ -11,9 +11,9 @@
 - name: Bootstrap the Identity service
   shell:
     keystone-manage bootstrap --bootstrap-password {{ keystone_bootstrap_password }} \
-    --bootstrap-admin-url http://{{ ansible_ssh_host }}:{{ keystone_admin_port }}/v3/ \
-    --bootstrap-internal-url http://{{ ansible_ssh_host }}:{{ keystone_public_port }}/v3/ \
-    --bootstrap-public-url http://{{ ansible_ssh_host }}:{{ keystone_public_port }}/v3/ \
+    --bootstrap-admin-url http://{{ keystone_vip }}:{{ keystone_admin_port }}/v3/ \
+    --bootstrap-internal-url http://{{ keystone_vip }}:{{ keystone_public_port }}/v3/ \
+    --bootstrap-public-url http://{{ keystone_vip }}:{{ keystone_public_port }}/v3/ \
     --bootstrap-region-id RegionOne
 
 - name: Enable and start service httpd

@@ -4,5 +4,19 @@
   roles:
     - role: keystone-install
     - role: keystone-config
+
+- hosts: leader
+  gather_facts: no
+  roles:
     - role: keystone-bootstrap
+    - role: keystone-fetch
+
+- hosts: follower
+  gather_facts: no
+  roles:
+    - role: keystone-distribute
+
+- hosts: all
+  gather_facts: no
+  roles:
     - role: keystone-restart
