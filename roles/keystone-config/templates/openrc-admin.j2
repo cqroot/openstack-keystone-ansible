@@ -3,5 +3,5 @@ export OS_PASSWORD={{ keystone_bootstrap_password }}
 export OS_PROJECT_NAME=admin
 export OS_USER_DOMAIN_NAME=Default
 export OS_PROJECT_DOMAIN_NAME=Default
-export OS_AUTH_URL=http://{{ ansible_ssh_host }}:{{ keystone_admin_port }}/v3
+export OS_AUTH_URL=http://{{ keystone_vip }}:{{ keystone_bootstrap_admin_port }}/v3
 export OS_IDENTITY_API_VERSION=3
